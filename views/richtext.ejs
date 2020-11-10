@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link type="text/css" href="/css/sample.css" rel="stylesheet" media="screen" />
+</head>
+
+<body>
+    <div class="centered">
+        <form action="/article/richtext" method="post">
+            <input type="hidden" name="id" value="<%=item.id %>"/>
+            <input type="hidden" name="page" value="<%=item.page %>"/>
+            标题：<input type="text" name="title" value="<%=item.title %>">
+            <textarea id="editor" name="content"><%= item.content %></textarea>
+            <% if (item.id){ %>
+                <input type="submit" value="修改">
+            <%}else{%>
+                <input type="submit" value="提交">
+            <%}%>
+        </form>
+    </div>
+
+
+    <script src="/javascripts/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                ckfinder: {
+                    uploadUrl: "/article/upload"
+                }
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    </script>
+
+</body>
+
+</html>

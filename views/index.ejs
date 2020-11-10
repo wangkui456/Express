@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="/css/bootstrap.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-default ">
+    <div class="container-fluid ">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <a class="navbar-brand glyphicon glyphicon-home" href="#"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><%= username %></a></li>
+          <li><a href="/richtext">写文章</a></li>
+          <li><a href="#">退出</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <!-- Table -->
+      <table class="table">
+        <tbody>
+          <% data.list.map(function(item,index) {%>
+          <tr>
+            <td><%= index+1 %></td>
+            <td><%= item.username %></td>
+            <td><a href="/compile?id=<%=item.id%>"><%= item.title %></a></td>
+            <td><%= item.time %></td>
+            <td><a href="/richtext?id=<%=item.id%>&page=<%=data.currentPage%>">编辑</a></td>
+            <td><a href="/article/delete?id=<%=item.id%>&page=<%=data.currentPage%>">删除</a></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      
+    </div>
+
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <% for(var i=0;i<data.total;i++){ %>
+          <li><a href="/?page=<%=i+1%>"><%= i+1%></a></li>
+        <%}%>
+      </ul>
+    </nav>
+  </div>
+</body>
+
+</html>
